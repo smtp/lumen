@@ -89,30 +89,4 @@ class AuthController extends Controller
             Log::error($exception);
         }
     }
-
-    /**
-     * @return mixed
-     */
-    public function dashboard() {
-        try {
-            $userData = $this->client->request(
-                'GET',
-                'https://api.rehive.com/3/user/',
-                [
-                    'headers' =>
-                        [
-                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
-                        ]
-                ]
-            );
-
-            $data = json_decode($userData->getBody());
-
-            return view('dashboard', ['data' => $data]);
-
-        } catch (\Exception $exception) {
-            Log::error($exception);
-            var_dump('get data failed');
-        }
-    }
 }

@@ -11,14 +11,10 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
-
 $router->get('auth', 'AuthController@auth');
-$router->get('login', 'AuthController@login');
+$router->get('/', 'AuthController@login');
 $router->get('logout', 'AuthController@logout');
 $router->get('dashboard', [
-    'uses' => 'AuthController@dashboard',
+    'uses' => 'UserController@dashboard',
     'as' => 'dashboard'
 ]);
