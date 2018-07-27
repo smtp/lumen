@@ -18,3 +18,13 @@ $router->get('dashboard', [
     'uses' => 'UserController@dashboard',
     'as' => 'dashboard'
 ]);
+
+$router->get('sign-up', [
+    'uses' => 'UserController@signUp',
+    'as' => 'sign-up'
+]);
+
+$router->get('create', [
+    'uses' => 'UserController@create',
+    'as' => 'create'
+]);

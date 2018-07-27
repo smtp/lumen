@@ -71,4 +71,36 @@ class UserController extends Controller
             var_dump('get data failed');
         }
     }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function signUp() {
+        return view('sign-up');
+    }
+
+    public function create() {
+        $input = Input::get();
+        $input['company'] = $this->company;
+
+        try {
+            $signUp = $this->client->request('POST', 'https://api.rehive.com/3/auth/register/', [
+                'form_params' => $input,
+            ]);
+
+            $response = json_decode($signUp->getBody());
+            setcookie('rehive_token', $response->data->token);
+            Log::debug('login successful', ['data' => $signUp->getBody()]);
+
+            return redirect()->route('dashboard');
+
+        } catch (GuzzleHttp\Exception\ClientException $exception) {
+//            $response = $exception->get;
+//
+//            dd($response);
+//            return view('sign-up')->withInput(Input::all())->withErrors('message', $response->message);
+
+            Log::error($exception);
+        }
+    }
 }

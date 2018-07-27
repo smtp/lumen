@@ -34,7 +34,7 @@
                 Don’t have an account?
             </span>
 
-        <a href="#" class="txt3">
+        <a href="{{ route('sign-up') }}" class="txt3">
             Sign up now
         </a>
     </div>
