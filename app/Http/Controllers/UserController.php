@@ -179,7 +179,7 @@ class UserController extends Controller
             setcookie('rehive_token', $response->data->token);
             Log::debug('login successful', ['data' => $signUp->getBody()]);
 
-            return redirect()->route('pages.dashboard');
+            return redirect()->route('pages.user');
 
         } catch (GuzzleHttp\Exception\ClientException $exception) {
 //            $response = $exception->get;
