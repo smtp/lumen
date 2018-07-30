@@ -16,8 +16,12 @@ $router->get('/', [
     'uses' => 'AuthController@login',
     'as' => 'index'
 ]);
-$router->get('logout', 'AuthController@logout');
+$router->get('logout', [
+    'uses' => 'AuthController@logout',
+    'as' => 'pages.logout'
+]);
 
+//user routes
 $router->get('dashboard', [
     'uses' => 'UserController@dashboard',
     'as' => 'pages.dashboard'
@@ -34,16 +38,16 @@ $router->get('create', [
 ]);
 
 $router->get('deposit', [
-    'uses' => 'UserController@create',
+    'uses' => 'UserController@deposit',
     'as' => 'pages.deposit'
 ]);
 
 $router->get('notifications', [
-    'uses' => 'UserController@create',
+    'uses' => 'UserController@notifications',
     'as' => 'pages.notifications'
 ]);
 
 $router->get('user', [
-    'uses' => 'UserController@create',
+    'uses' => 'UserController@user',
     'as' => 'pages.user'
 ]);

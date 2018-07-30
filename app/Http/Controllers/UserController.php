@@ -25,6 +25,11 @@ class UserController extends Controller
     protected $request;
 
     /**
+     * @var $user
+     */
+    protected $user;
+
+    /**
      * AuthController constructor.
      *
      * @param GuzzleHttp\Client $guzzleHttp
@@ -64,7 +69,11 @@ class UserController extends Controller
             $user['email'] = $data->data->email;
             $user['status'] = $data->data->status;
 
-            return view('pages.dashboard', ['user' => $user]);
+            $this->user = $user;
+
+            view()->share('user', $user);
+
+            return view('pages.dashboard');
 
         } catch (\Exception $exception) {
             Log::error($exception);
@@ -77,6 +86,84 @@ class UserController extends Controller
      */
     public function signUp() {
         return view('pages.sign-up');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function notifications() {
+
+        try {
+            $userData = $this->client->request(
+                'GET',
+                'https://api.rehive.com/3/user/',
+                [
+                    'headers' =>
+                        [
+                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
+                        ]
+                ]
+            );
+
+            $data = json_decode($userData->getBody());
+            $user['username'] = $data->data->username;
+            $user['first_name'] = $data->data->first_name;
+            $user['last_name'] = $data->data->last_name;
+            $user['nationality'] = $data->data->nationality;
+            $user['language'] = $data->data->language;
+            $user['birth_date'] = $data->data->birth_date;
+            $user['id_number'] = $data->data->id_number;
+            $user['email'] = $data->data->email;
+            $user['status'] = $data->data->status;
+
+            $this->user = $user;
+
+            view()->share('user', $user);
+
+            return view('pages.notifications');
+
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            var_dump('get data failed');
+        }
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function user() {
+        try {
+            $userData = $this->client->request(
+                'GET',
+                'https://api.rehive.com/3/user/',
+                [
+                    'headers' =>
+                        [
+                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
+                        ]
+                ]
+            );
+
+            $data = json_decode($userData->getBody());
+            $user['username'] = $data->data->username;
+            $user['first_name'] = $data->data->first_name;
+            $user['last_name'] = $data->data->last_name;
+            $user['nationality'] = $data->data->nationality;
+            $user['language'] = $data->data->language;
+            $user['birth_date'] = $data->data->birth_date;
+            $user['id_number'] = $data->data->id_number;
+            $user['email'] = $data->data->email;
+            $user['status'] = $data->data->status;
+
+            view()->share('user', $user);
+
+            return view('pages.user');
+
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            var_dump('get data failed');
+        }
+
     }
 
     public function create() {
@@ -102,5 +189,9 @@ class UserController extends Controller
 
             Log::error($exception);
         }
+    }
+
+    public function deposit() {
+        return redirect()->route('pages.dashboard');
     }
 }

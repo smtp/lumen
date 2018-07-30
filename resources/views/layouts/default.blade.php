@@ -9,7 +9,9 @@
             </div>
 
             <div class="main-panel">
-                @include('includes.top-navigation')
+                @if(isset($user))
+                    @include('includes.top-navigation')
+                @endif
                 <div class="content">
                     @yield('content')
                 </div>
