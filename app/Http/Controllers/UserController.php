@@ -64,7 +64,7 @@ class UserController extends Controller
             $user['email'] = $data->data->email;
             $user['status'] = $data->data->status;
 
-            return view('dashboard', ['user' => $user]);
+            return view('pages.dashboard', ['user' => $user]);
 
         } catch (\Exception $exception) {
             Log::error($exception);
@@ -76,7 +76,7 @@ class UserController extends Controller
      * @return \Illuminate\View\View
      */
     public function signUp() {
-        return view('sign-up');
+        return view('pages.sign-up');
     }
 
     public function create() {
@@ -92,7 +92,7 @@ class UserController extends Controller
             setcookie('rehive_token', $response->data->token);
             Log::debug('login successful', ['data' => $signUp->getBody()]);
 
-            return redirect()->route('dashboard');
+            return redirect()->route('pages.dashboard');
 
         } catch (GuzzleHttp\Exception\ClientException $exception) {
 //            $response = $exception->get;

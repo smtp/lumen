@@ -12,16 +12,19 @@
 */
 
 $router->get('auth', 'AuthController@auth');
-$router->get('/', 'AuthController@login');
+$router->get('/', [
+    'uses' => 'AuthController@login',
+    'as' => 'index'
+]);
 $router->get('logout', 'AuthController@logout');
 $router->get('dashboard', [
     'uses' => 'UserController@dashboard',
-    'as' => 'dashboard'
+    'as' => 'pages.dashboard'
 ]);
 
 $router->get('sign-up', [
     'uses' => 'UserController@signUp',
-    'as' => 'sign-up'
+    'as' => 'pages.sign-up'
 ]);
 
 $router->get('create', [

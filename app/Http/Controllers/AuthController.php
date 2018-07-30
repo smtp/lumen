@@ -41,7 +41,7 @@ class AuthController extends Controller
      * @return \Illuminate\View\View
      */
     public function login() {
-        return view('index');
+        return view('pages.index');
     }
 
     /**
@@ -60,7 +60,7 @@ class AuthController extends Controller
 
             sleep(1);
 
-            return redirect()->route('dashboard');
+            return redirect()->route('pages.dashboard');
 
         } catch (\Exception $exception) {
             Log::error($exception);
@@ -83,7 +83,7 @@ class AuthController extends Controller
                 ]
             );
             Log::debug('logout successful', ['data' => $logout->getBody()]);
-            return view('index');
+            return view('pages.index');
 
         } catch (\Exception $exception) {
             Log::error($exception);
