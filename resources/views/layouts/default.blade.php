@@ -1,24 +1,22 @@
 <html>
-<head>
-    @include('includes.head')
-</head>
-<body>
-<div class="container">
+    <head>
+        @include('includes.head')
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="sidebar" data-color="green" data-image="assets/img/sidebar-5.jpg">
+                @include('includes.sidebar')
+            </div>
 
-    <header class="row">
-        {{--@include('includes.header')--}}
-    </header>
+            <div class="main-panel">
+                @include('includes.top-navigation')
+                <div class="content">
+                    @yield('content')
+                </div>
+                @include('includes.footer')
+            </div>
 
-    <div id="main" class="row">
-
-        @yield('content')
-
-    </div>
-
-    <footer class="row">
-        {{--@include('includes.footer')--}}
-    </footer>
-
-</div>
-</body>
+        </div>
+    </body>
+    @include('includes.scripts')
 </html>

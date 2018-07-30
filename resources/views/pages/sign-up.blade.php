@@ -7,17 +7,17 @@
         <span class="login100-form-title">
             Sign up
         </span>
-        <div class="wrap-input100 validate-input" data-validate = "Please enter your first name">
-            <span class="focus-input100">First Name</span>
+        <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter your first name">
             <input class="input100" type="text" name="first_name" placeholder="FirstName">
+            <span class="focus-input100">First Name</span>
         </div>
 
         <div class="wrap-input100 validate-input" data-validate = "Please enter your surname">
-            <span class="focus-input100">Surname</span>
             <input class="input100" type="text" name="last_name" placeholder="Surname">
+            <span class="focus-input100">Surname</span>
         </div>
 
-        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email address">
+        <div class="wrap-input100 validate-input m-b-17" data-validate="Please enter email address">
             <span class="focus-input100">Email Address</span>
             <input class="input100" type="text" name="email" placeholder="user@prospa.co.za">
         </div>
