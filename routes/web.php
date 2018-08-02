@@ -32,9 +32,19 @@ $router->get('sign-up', [
     'as' => 'pages.sign-up'
 ]);
 
-$router->get('create', [
-    'uses' => 'UserController@create',
-    'as' => 'create'
+$router->get('sign-up-step-2', [
+    'uses' => 'UserController@signUpStepTwo',
+    'as' => 'pages.sign-up-step-2'
+]);
+
+$router->get('createUser', [
+    'uses' => 'UserController@createUser',
+    'as' => 'createUser'
+]);
+
+$router->get('updateUser', [
+    'uses' => 'UserController@updateUser',
+    'as' => 'updateUser'
 ]);
 
 $router->get('deposit', [

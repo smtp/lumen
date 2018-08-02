@@ -52,7 +52,7 @@ class UserController extends Controller
                     'headers' =>
                         [
                             'Authorization' => 'Token ' . session()->get('rehive_token'),
-                        ]
+                        ],
                 ]
             );
 
@@ -66,6 +66,7 @@ class UserController extends Controller
             $user['id_number'] = $data->data->id_number;
             $user['email'] = $data->data->email;
             $user['status'] = $data->data->status;
+            $user['metadata'] = $data->data->status;
 
             $this->user = $user;
 
@@ -76,7 +77,10 @@ class UserController extends Controller
         }
     }
 
-    public function create() {
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function createUser() {
         $input = Input::get();
         $input['company'] = $this->company;
 
@@ -85,22 +89,43 @@ class UserController extends Controller
                 'form_params' => $input,
             ]);
 
+            $response = json_decode($signUp->getBody());
+            session(['rehive_token' => $response->data->token]);
+
+            Log::debug('sign up and log in successful', ['data' => $signUp->getBody()]);
+
+            return redirect()->route('pages.sign-up-step-2');
+
+        } catch (GuzzleHttp\Exception\ClientException $exception) {
+//            $response = $exception->get;
+//
+//            dd($response);
+//            return view('sign-up')->withInput(Input::all())->withErrors('message', $response->message);
+
+            Log::error($exception);
+        }
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateUser() {
+        $input = Input::get();
+
+        try {
+            $signUp = $this->client->request('PATCH', 'https://api.rehive.com/3/user/', [
+                'headers' =>
+                    [
+                        'Authorization' => 'Token ' . session()->get('rehive_token'),
+                    ],
+                'form_params' => $input,
+            ]);
+
 
             $response = json_decode($signUp->getBody());
-            setcookie('rehive_token', $response->data->token);
-            Log::debug('login successful', ['data' => $signUp->getBody()]);
+            Log::debug('sign up and log in successful', ['data' => $signUp->getBody()]);
 
-//            $this->client->request('POST', 'https://api.rehive.com/3/accounts/', [
-//                'headers' =>
-//                    [
-//                        'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
-//                    ],
-//                'form_params' => [
-//                    'name' => null
-//                ],
-//            ]);
-
-            return redirect()->route('pages.user');
+            return redirect()->route('pages.dashboard')->with('message', 'Successfully updated user data');
 
         } catch (GuzzleHttp\Exception\ClientException $exception) {
 //            $response = $exception->get;
@@ -126,6 +151,14 @@ class UserController extends Controller
      */
     public function signUp() {
         return view('pages.sign-up');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function signUpStepTwo() {
+
+        return view('pages.sign-up-step-2');
     }
 
     /**
@@ -169,7 +202,7 @@ class UserController extends Controller
                 [
                     'headers' =>
                         [
-                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
+                            'Authorization' => 'Token ' . session()->get('rehive_token'),
                         ],
                     'form_params' => $input,
                 ]

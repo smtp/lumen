@@ -2,6 +2,11 @@
 @section('content')
     <div class="container-fluid">
             <div class="row">
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">

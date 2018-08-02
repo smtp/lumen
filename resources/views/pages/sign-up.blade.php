@@ -1,48 +1,66 @@
 @extends('layouts.default')
 @section('content')
-    <form action="create">
+    <form action="createUser">
         @if(isset($message))
             <p>{{$message}}</p>
         @endif
-        <span class="login100-form-title">
+        <h4>
             Sign up
-        </span>
+        </h4>
         <div class="row">
             <div class="col-md-12">
-                <input class="input100" type="text" name="first_name" placeholder="FirstName">
-                <span class="focus-input100">First Name</span>
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" placeholder="First name" name="first_name">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Surname</label>
+                    <input type="text" class="form-control" placeholder="Surname" name="last_name">
+                </div>
             </div>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate = "Please enter your surname">
-            <input class="input100" type="text" name="last_name" placeholder="Surname">
-            <span class="focus-input100">Surname</span>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input class="form-control" type="email" name="email" placeholder="user@prospa.co.za">
+                </div>
+            </div>
         </div>
 
-        <div class="wrap-input100 validate-input m-b-17" data-validate="Please enter email address">
-            <span class="focus-input100">Email Address</span>
-            <input class="input100" type="text" name="email" placeholder="user@prospa.co.za">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" type="password" name="password1" placeholder="8 characters or more">
+                </div>
+            </div>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate = "Please enter password">
-            <span class="focus-input100">Password</span>
-            <input class="input100" type="password" name="password1" placeholder="Password">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input class="form-control" type="password" name="password2" placeholder="Same password as the one you entered above">
+                </div>
+            </div>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate = "Please re-enter password">
-            <span class="focus-input100">Confirm Password</span>
-            <input class="input100" type="password" name="password2" placeholder="Password">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <input class="form-control" type="checkbox" name="terms_and_conditions">
+                    <span class="focus-input100">I have read and agree to the <a href="https://www.prospa.co.za/terms-of-use" target="_blank">terms and conditions</a></span>
+                </div>
+            </div>
         </div>
 
-        <div>
-            <input class="input100" type="checkbox" name="terms_and_conditions">
-            <span class="focus-input100">I have read and agree to the terms and conditions</span>
-        </div>
-
-        <div class="container-login100-form-btn">
-            <button class="login100-form-btn">
-                Sign up
-            </button>
-        </div>
+            <button type="submit" class="btn btn-info btn-fill pull-right">Sign Up</button>
+            <div class="clearfix"></div>
     </form>
 @stop
