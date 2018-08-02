@@ -1,15 +1,17 @@
 @extends('layouts.default')
 @section('content')
-    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="create">
+    <form action="create">
         @if(isset($message))
             <p>{{$message}}</p>
         @endif
         <span class="login100-form-title">
             Sign up
         </span>
-        <div class="wrap-input100 validate-input m-b-16" data-validate = "Please enter your first name">
-            <input class="input100" type="text" name="first_name" placeholder="FirstName">
-            <span class="focus-input100">First Name</span>
+        <div class="row">
+            <div class="col-md-12">
+                <input class="input100" type="text" name="first_name" placeholder="FirstName">
+                <span class="focus-input100">First Name</span>
+            </div>
         </div>
 
         <div class="wrap-input100 validate-input" data-validate = "Please enter your surname">

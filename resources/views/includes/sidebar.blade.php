@@ -1,6 +1,6 @@
 <div class="sidebar-wrapper">
     <div class="logo">
-        <a href="{{ url() }}" class="simple-text">
+        <a href="{{ url('') }}" class="simple-text">
             Prospa
         </a>
     </div>

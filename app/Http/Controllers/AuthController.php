@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 
@@ -55,7 +56,9 @@ class AuthController extends Controller
                 'form_params' => $input,
             ]);
             $response = json_decode($login->getBody());
-            setcookie('rehive_token', $response->data->token);
+
+            session(['rehive_token' => $response->data->token]);
+
             Log::debug('login successful', ['data' => $login->getBody()]);
 
             sleep(1);

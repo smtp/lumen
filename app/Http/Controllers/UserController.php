@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use GuzzleHttp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
 
@@ -50,7 +51,7 @@ class UserController extends Controller
                 [
                     'headers' =>
                         [
-                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
+                            'Authorization' => 'Token ' . session()->get('rehive_token'),
                         ]
                 ]
             );
