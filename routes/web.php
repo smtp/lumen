@@ -42,6 +42,11 @@ $router->get('deposit', [
     'as' => 'pages.deposit'
 ]);
 
+$router->post('store-deposit', [
+    'uses' => 'UserController@storeDeposit',
+    'as' => 'pages.store-deposit'
+]);
+
 $router->get('notifications', [
     'uses' => 'UserController@notifications',
     'as' => 'pages.notifications'

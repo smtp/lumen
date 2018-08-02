@@ -42,10 +42,7 @@ class UserController extends Controller
         $this->request = $request;
     }
 
-    /**
-     * @return mixed
-     */
-    public function dashboard() {
+    private function getUserData() {
         try {
             $userData = $this->client->request(
                 'GET',
@@ -72,98 +69,10 @@ class UserController extends Controller
             $this->user = $user;
 
             view()->share('user', $user);
-
-            return view('pages.dashboard');
-
         } catch (\Exception $exception) {
             Log::error($exception);
             var_dump('get data failed');
         }
-    }
-
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function signUp() {
-        return view('pages.sign-up');
-    }
-
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function notifications() {
-
-        try {
-            $userData = $this->client->request(
-                'GET',
-                'https://api.rehive.com/3/user/',
-                [
-                    'headers' =>
-                        [
-                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
-                        ]
-                ]
-            );
-
-            $data = json_decode($userData->getBody());
-            $user['username'] = $data->data->username;
-            $user['first_name'] = $data->data->first_name;
-            $user['last_name'] = $data->data->last_name;
-            $user['nationality'] = $data->data->nationality;
-            $user['language'] = $data->data->language;
-            $user['birth_date'] = $data->data->birth_date;
-            $user['id_number'] = $data->data->id_number;
-            $user['email'] = $data->data->email;
-            $user['status'] = $data->data->status;
-
-            $this->user = $user;
-
-            view()->share('user', $user);
-
-            return view('pages.notifications');
-
-        } catch (\Exception $exception) {
-            Log::error($exception);
-            var_dump('get data failed');
-        }
-    }
-
-    /**
-     * @return \Illuminate\View\View
-     */
-    public function user() {
-        try {
-            $userData = $this->client->request(
-                'GET',
-                'https://api.rehive.com/3/user/',
-                [
-                    'headers' =>
-                        [
-                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
-                        ]
-                ]
-            );
-
-            $data = json_decode($userData->getBody());
-            $user['username'] = $data->data->username;
-            $user['first_name'] = $data->data->first_name;
-            $user['last_name'] = $data->data->last_name;
-            $user['nationality'] = $data->data->nationality;
-            $user['language'] = $data->data->language;
-            $user['birth_date'] = $data->data->birth_date;
-            $user['id_number'] = $data->data->id_number;
-            $user['email'] = $data->data->email;
-            $user['status'] = $data->data->status;
-
-            view()->share('user', $user);
-
-            return view('pages.user');
-
-        } catch (\Exception $exception) {
-            Log::error($exception);
-            var_dump('get data failed');
-        }
-
     }
 
     public function create() {
@@ -175,9 +84,20 @@ class UserController extends Controller
                 'form_params' => $input,
             ]);
 
+
             $response = json_decode($signUp->getBody());
             setcookie('rehive_token', $response->data->token);
             Log::debug('login successful', ['data' => $signUp->getBody()]);
+
+//            $this->client->request('POST', 'https://api.rehive.com/3/accounts/', [
+//                'headers' =>
+//                    [
+//                        'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
+//                    ],
+//                'form_params' => [
+//                    'name' => null
+//                ],
+//            ]);
 
             return redirect()->route('pages.user');
 
@@ -191,7 +111,77 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function dashboard() {
+        $this->getUserData();
+        return view('pages.dashboard');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function signUp() {
+        return view('pages.sign-up');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function notifications() {
+        $this->getUserData();
+        return view('pages.notifications');
+    }
+
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function user() {
+        $this->getUserData();
+        return view('pages.user');
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function deposit() {
-        return redirect()->route('pages.dashboard');
+        $this->getUserData();
+        return view('pages.deposit');
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function storeDeposit() {
+        $input = Input::get();
+        $input['currency'] = 'ZAR';
+        $input['reference'] = random_bytes(16);
+
+        try {
+            $data = $this->client->request(
+                'POST',
+                'https://api.rehive.com/3/transactions/credit/',
+                [
+                    'headers' =>
+                        [
+                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
+                        ],
+                    'form_params' => $input,
+                ]
+            );
+
+            $data = json_decode($data->getBody());
+//            $user['username'] = $data->data->username;
+
+            $this->getUserData();
+            return redirect()->route('pages.deposit');
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            var_dump('get data failed');
+        }
     }
 }

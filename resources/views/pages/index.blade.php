@@ -1,35 +1,38 @@
 @extends('layouts.default')
 @section('content')
-    <form class="login100-form validate-form p-l-55 p-r-55 p-t-178" action="/auth">
-            <span class="login100-form-title">
-                Sign In
-            </span>
-
-        <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-            <input class="input100" type="text" name="user" placeholder="Username">
-            <span class="focus-input100"></span>
+    <div class="header">
+        <h4 class="title">Sign In</h4>
+    </div>
+    <form action="/auth">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" class="form-control" placeholder="Please enter your email address" name="user">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Please enter your password" value="password" name="password">
+                </div>
+            </div>
         </div>
 
-        <div class="wrap-input100 validate-input" data-validate = "Please enter password">
-            <input class="input100" type="password" name="password" placeholder="Password">
-            <span class="focus-input100"></span>
-        </div>
+        {{--<div class="text-right p-t-13 p-b-23">--}}
+                {{--<span class="txt1">--}}
+                    {{--Forgot--}}
+                {{--</span>--}}
 
-        <div class="text-right p-t-13 p-b-23">
-                <span class="txt1">
-                    Forgot
-                </span>
+            {{--<a href="#" class="txt2">--}}
+                {{--Username / Password?--}}
+            {{--</a>--}}
+        {{--</div>--}}
 
-            <a href="#" class="txt2">
-                Username / Password?
-            </a>
-        </div>
-
-        <div class="container-login100-form-btn">
-            <button class="login100-form-btn">
-                Sign in
-            </button>
-        </div>
+        <button type="submit" class="btn btn-info btn-fill pull-right">Login</button>
+        <div class="clearfix"></div>
 
         <div class="flex-col-c p-t-170 p-b-40">
                 <span class="txt1 p-b-9">
