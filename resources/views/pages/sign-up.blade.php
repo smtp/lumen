@@ -10,6 +10,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    *
                     <label>First Name</label>
                     <input type="text" class="form-control" placeholder="First name" name="first_name">
                 </div>
@@ -18,8 +19,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    *
                     <label>Surname</label>
-                    <input type="text" class="form-control" placeholder="Surname" name="last_name">
+                    <input type="text" class="form-control" placeholder="Surname" name="last_name" required>
                 </div>
             </div>
         </div>
@@ -27,7 +29,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
-                    <label>Email Address</label>
+                    *
+                    <label>Mobile number</label>
                     <input class="form-control" type="email" name="email" placeholder="user@prospa.co.za">
                 </div>
             </div>
@@ -36,6 +39,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    *
                     <label>Password</label>
                     <input class="form-control" type="password" name="password1" placeholder="8 characters or more">
                 </div>
@@ -45,6 +49,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
+                    *
                     <label>Confirm Password</label>
                     <input class="form-control" type="password" name="password2" placeholder="Same password as the one you entered above">
                 </div>

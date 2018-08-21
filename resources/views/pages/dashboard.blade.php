@@ -2,61 +2,63 @@
 @section('content')
     <div class="container-fluid">
             <div class="row">
-                @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('message') }}
-                    </div>
-                @endif
                 <div class="col-md-12">
                     <div class="card">
                         <div class="header">
-                            <h4 class="title">Last 5 transactions</h4>
-                            <p class="category">Here is a summary of your most recent transactions</p>
+                            <h4 class="title">Striped Table with Hover</h4>
+                            <p class="category">Here is a subtitle for this table</p>
                         </div>
                         <div class="content table-responsive table-full-width">
                             <table class="table table-hover table-striped">
                                 <thead>
-                                <th>Type</th>
-                                <th>Vendor</th>
-                                <th>Amount</th>
-                                <th>Location</th>
-                                <th>Date/Time</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Salary</th>
+                                <th>Country</th>
+                                <th>City</th>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td>Withdrawal</td>
+                                    <td>1</td>
                                     <td>Dakota Rice</td>
-                                    <td>R50</td>
-                                    <td>Langa</td>
-                                    <td>2018-07-30 16:30:26</td>
+                                    <td>$36,738</td>
+                                    <td>Niger</td>
+                                    <td>Oud-Turnhout</td>
                                 </tr>
                                 <tr>
-                                    <td>Deposit</td>
+                                    <td>2</td>
                                     <td>Minerva Hooper</td>
-                                    <td>R12</td>
-                                    <td>Langa</td>
-                                    <td>2018-07-30 12:36:56</td>
+                                    <td>$23,789</td>
+                                    <td>Curaçao</td>
+                                    <td>Sinaai-Waas</td>
                                 </tr>
                                 <tr>
-                                    <td>Deposit</td>
+                                    <td>3</td>
                                     <td>Sage Rodriguez</td>
-                                    <td>R56</td>
-                                    <td>Woodstock</td>
-                                    <td>2018-07-27 01:36:26</td>
+                                    <td>$56,142</td>
+                                    <td>Netherlands</td>
+                                    <td>Baileux</td>
                                 </tr>
                                 <tr>
-                                    <td>Deposit</td>
+                                    <td>4</td>
                                     <td>Philip Chaney</td>
-                                    <td>R23</td>
-                                    <td>Parow</td>
-                                    <td>2018-07-24 09:55:00</td>
+                                    <td>$38,735</td>
+                                    <td>Korea, South</td>
+                                    <td>Overland Park</td>
                                 </tr>
                                 <tr>
-                                    <td>Deposit</td>
+                                    <td>5</td>
                                     <td>Doris Greene</td>
-                                    <td>R9</td>
-                                    <td>Belville</td>
-                                    <td>2018-07-21 12:36:26</td>
+                                    <td>$63,542</td>
+                                    <td>Malawi</td>
+                                    <td>Feldkirchen in Kärnten</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Mason Porter</td>
+                                    <td>$78,615</td>
+                                    <td>Chile</td>
+                                    <td>Gloucester</td>
                                 </tr>
                                 </tbody>
                             </table>

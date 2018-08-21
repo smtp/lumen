@@ -13,6 +13,11 @@
                     @include('includes.top-navigation')
                 @endif
                 <div class="content">
+                    @if(session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
                     @yield('content')
                 </div>
                 @include('includes.footer')

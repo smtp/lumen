@@ -81,11 +81,13 @@ class AuthController extends Controller
                 [
                     'headers' =>
                         [
-                            'Authorization' => 'Token ' . $this->request->cookie('rehive_token'),
-                        ]
+                            'Authorization' => 'Token ' . session()->get('rehive_token'),
+                        ],
                 ]
             );
             Log::debug('logout successful', ['data' => $logout->getBody()]);
+            view()->share('message', 'Successfully logged out');
+
             return view('pages.index');
 
         } catch (\Exception $exception) {

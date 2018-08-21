@@ -28,7 +28,7 @@
             <div class="col-md-12">
                 <div class="form-group">
                     <label>PIN</label>
-                    <input class="form-control" type="password" name="metadata{pin}" placeholder="Enter a 4 digit PIN" maxlength="4" minlength="4">
+                    <input class="form-control" type="password" name="metadata{'pin'}" placeholder="Enter a 4 digit PIN" maxlength="4" minlength="4">
                 </div>
             </div>
         </div>

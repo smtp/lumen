@@ -85,7 +85,8 @@ class UserController extends Controller
         $input['company'] = $this->company;
 
         try {
-            $signUp = $this->client->request('POST', 'https://api.rehive.com/3/auth/register/', [
+            $signUp = $this->client->request('POST',
+                'https://api.rehive.com/3/auth/register/', [
                 'form_params' => $input,
             ]);
 
@@ -142,8 +143,33 @@ class UserController extends Controller
      * @return mixed
      */
     public function dashboard() {
-        $this->getUserData();
+        try {
+            $data = $this->client->request(
+                'GET',
+                'https://api.rehive.com/3/transactions/',
+                [
+                    'headers' =>
+                        [
+                            'Authorization' => 'Token ' . session()->get('rehive_token'),
+                        ],
+                ]
+            );
+
+            $data = json_decode($data->getBody());
+            $this->getUserData();
+            view()->share('transactions', $data);
+
+            return view('pages.dashboard');
+
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            var_dump('get data failed');
+        }
+
+//        view()->share('transactions', $data);
+
         return view('pages.dashboard');
+
     }
 
     /**
@@ -193,7 +219,7 @@ class UserController extends Controller
     public function storeDeposit() {
         $input = Input::get();
         $input['currency'] = 'ZAR';
-        $input['reference'] = random_bytes(16);
+//        $input['reference'] = random_bytes(16);
 
         try {
             $data = $this->client->request(
